@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { useMutation, gql } from "@apollo/client";
 import { NEW_PRACTICE } from '../gql/mutations/newPractice';
 import { GET_PRACTICES } from '../gql/queries/getPractices';
+import Button from '../components/Button';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,7 +24,7 @@ const NewPractice = () => {
     const existingPractices = cache.readQuery({
       query: GET_PRACTICES
     });
-    
+
     // Add the new practice to the cache
     const newPractice = data.insert_practices.returning[0];
     cache.writeQuery({
@@ -44,7 +46,7 @@ const NewPractice = () => {
           }}>
             <div>
               <label htmlFor="name" className="block text-md font-medium text-gray-700">
-                Practice 
+                Practice
               </label>
               <div className="mt-2">
                 <input
@@ -58,7 +60,7 @@ const NewPractice = () => {
             </div>
             <div>
               <label htmlFor="weekly_frequency" className="block text-md font-medium text-gray-700">
-                Weekly Frequency 
+                Weekly Frequency
               </label>
               <div className="mt-2">
                 <input
@@ -73,9 +75,7 @@ const NewPractice = () => {
               </div>
             </div>
             <div className="flex justify-end">
-              <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Save
-              </button>
+							<Button type="submit">Save</Button>
             </div>
           </form>
         </div>
