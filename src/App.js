@@ -13,23 +13,25 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div className="bg-gray-100 sm:mx-auto sm:w-full sm:max-w-md">
-      <Header/>
-      <div className="px-4 py-4 mb-8 mt-4">
+
         <Router>
-          <Switch>
-            <Route path="/practices">
-              <Practices />
-            </Route>
-            <Route path={`/practice/new`}>
-              <NewPractice />
-            </Route>
-            <Route path={`/practice/:id`}>
-              <Practice />
-            </Route>
-          </Switch>
+					<Header/>
+					<div className="px-4 py-4 mb-8 mt-4">
+						<Switch>
+							<Route path="/practices">
+								<Practices />
+							</Route>
+							<Route path={`/practice/new`}>
+								<NewPractice />
+							</Route>
+							<Route path={`/practice/:id`}>
+								<Practice />
+							</Route>
+						</Switch>
+					</div>
+					<Footer/>
         </Router>
-      </div>
-      <Footer/>
+
     </div>
   );
 }

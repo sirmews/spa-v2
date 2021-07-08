@@ -29,16 +29,16 @@ const Practices = () => {
       <Link to={`/practice/new`}>
         <li className="col-span-1 border-4 border-dashed border-gray-200 rounded-lg cursor-pointer hover:border-gray-400">
           <div className="w-full flex items-center justify-between space-x-6 h-full">
-            <div className="flex-1 flex flex-col items-center space-y-2">
+            <div className="flex-1 flex flex-row justify-center items-center space-x-2 p-4">
                 <p className="text-gray-400">New Practice</p>
-                <PlusCircleIcon className="text-gray-400 h-8" />
+                <PlusCircleIcon className="text-gray-400 h-6" />
             </div>
           </div>
         </li>
       </Link>
       {practices.map((practice: any, index: string) => (
         <Link key={index} to={`/practice/${practice.id}`}>
-          <li className="flex flex-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+          <li className="flex flex-1 bg-white rounded-lg shadow hover:shadow-md divide-y divide-gray-200">
             <div className="w-full flex items-center justify-between p-6 space-x-6">
               <div className="flex-1 truncate">
                 <div className="flex items-center space-x-3">
