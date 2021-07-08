@@ -48,9 +48,12 @@
     ]
   },
   "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
     "@craco/craco": "^6.1.2",
     "@types/react-router-dom": "^5.1.7",
     "autoprefixer": "^9.8.6",
+    "husky": "^7.0.1",
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4",
     "workbox-build": "^5.1.4"
