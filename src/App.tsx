@@ -33,7 +33,7 @@ function App() {
 							{routes.map(({path, component}: any, key: any) => {
 								return (
 									componentRegistry[component] ? (
-										<Route key={key} path={path} component={Practices}/>
+										<Route key={key} path={path} component={componentRegistry[component]}/>
 									) : ''
 								)
 							})}
