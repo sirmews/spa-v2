@@ -6,6 +6,7 @@ export const GET_PRACTICES = gql`
       id
       name
       goal
+			weekly_frequency
       user {
         email
         first_name
