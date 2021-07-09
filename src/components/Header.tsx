@@ -10,9 +10,6 @@ const Header = () => {
 			<div className="flex-1 flex justify-start">
 				<BackButton onClick={() => history.goBack()}/>
 			</div>
-			<div className="flex-1 flex justify-center">
-				<h1 className="text-2xl">iDojo</h1>
-			</div>
 			<div className="flex-1 flex justify-end">
 				<Avatar/>
 			</div>

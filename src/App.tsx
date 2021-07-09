@@ -9,6 +9,7 @@ import Practice from './practices/id';
 import NewPractice from './practices/new';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Sidebar from "./components/Sidebar";
 import routes from './routes';
 import React, { Component } from "react";
 import { ReactElement } from "react";
@@ -24,22 +25,29 @@ const componentRegistry: {
 
 function App() {
   return (
-    <div className="bg-gray-100 sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="bg-gray-100 sm:mx-auto sm:w-full sm:max-w-2xl">
 
         <Router>
-					<Header/>
-					<div className="px-4 py-4 mb-8 mt-4">
-						<Switch>
-							{routes.map(({path, component}: any, key: any) => {
-								return (
-									componentRegistry[component] ? (
-										<Route key={key} path={path} component={componentRegistry[component]}/>
-									) : ''
-								)
-							})}
-						</Switch>
+					<div className="flex">
+						<div className="flex-1">
+							<Sidebar/>
+						</div>
+						<div className="flex-auto">
+							<Header/>
+							<div className="px-4 py-4 mb-8 mt-4">
+								<Switch>
+									{routes.map(({path, component}: any, key: any) => {
+										return (
+											componentRegistry[component] ? (
+												<Route key={key} path={path} component={componentRegistry[component]}/>
+											) : ''
+										)
+									})}
+								</Switch>
+							</div>
+							<Footer/>
+						</div>
 					</div>
-					<Footer/>
         </Router>
 
     </div>
