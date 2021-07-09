@@ -1,13 +1,6 @@
-import React, {useState} from 'react';
 import { useQuery, gql } from "@apollo/client";
 import { GET_PRACTICE } from '../gql/queries/getPractice';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Practice = () => {
   const { id } = useParams<{ id?: string }>();

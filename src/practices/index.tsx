@@ -1,14 +1,7 @@
-import React, {useState} from 'react';
-import { useQuery, gql } from "@apollo/client";
-import { useMutation } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { GET_PRACTICES } from '../gql/queries/getPractices';
 import { PlusCircleIcon } from '@heroicons/react/solid';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Practices = () => {
   const { data, loading, error } = useQuery(GET_PRACTICES);

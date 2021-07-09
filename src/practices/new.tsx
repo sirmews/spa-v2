@@ -1,17 +1,9 @@
-import React, {useState} from 'react';
-import { useMutation, gql } from "@apollo/client";
+import { useState } from 'react';
+import { useMutation } from "@apollo/client";
 import { NEW_PRACTICE } from '../gql/mutations/newPractice';
 import { GET_PRACTICES } from '../gql/queries/getPractices';
 import Button from '../components/Button';
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useHistory
-} from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const NewPractice = () => {
 

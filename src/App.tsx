@@ -1,10 +1,7 @@
 import {
   BrowserRouter as Router,
 } from "react-router-dom";
-import Practices from './practices/index';
 import Layout from "./components/Layout";
-import React, { Component } from "react";
-import { ReactElement } from "react";
 
 
 function App() {
