@@ -6,17 +6,17 @@ const routes = [
 		sidebar: true,
 	},
 	{
+		name: 'New Practice',
+		path: '/practice/new',
+		component: 'NewPractice',
+		sidebar: false,
+	},
+	{
 		name: 'View Practice',
 		path: '/practice/:id',
 		component: 'Practice',
 		sidebar: false,
 	},
-	{
-		name: 'New Practice',
-		path: '/practice/new',
-		component: 'NewPractice',
-		sidebar: false,
-	}
 ]
 
 export default routes;

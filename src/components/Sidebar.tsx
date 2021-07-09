@@ -2,7 +2,7 @@
 import routes from '../routes';
 
 const Sidebar = () => (
-	<div className="hidden h-full bg-gray-800 md:flex md:flex-shrink-0">
+	<div className="hidden min-h-screen h-full bg-gray-800 md:flex md:flex-shrink-0">
 		<div className="flex flex-col w-64">
 			<div className="flex flex-col flex-grow pt-5 pb-4 overflow-y-auto">
 				<div className="flex items-center flex-shrink-0 px-4">
@@ -14,7 +14,7 @@ const Sidebar = () => (
 							<a
 								key={key}
 								href={path}
-								className={`bg-gray-700 text-gray-100 hover:bg-gray-600 group flex items-center px-3 py-2 text-sm font-medium rounded-md`}
+								className={`bg-gray-700 text-gray-100 hover:bg-gray-600 group flex items-center px-3 py-2 text-lg font-medium rounded-md`}
 							>
 								{name}
 							</a>
