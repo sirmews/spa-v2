@@ -9,14 +9,30 @@ import {
   InMemoryCache,
   ApolloProvider,
   useQuery,
-  HttpLink,
+	createHttpLink,
   gql
 } from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
+
+const httpLink = createHttpLink({
+    //uri: 'https://idojo-backend-fn4hn.ondigitalocean.app/graphql',
+		uri: 'http://microcreds.test/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
 
 const client = new ApolloClient({
-  link: new HttpLink({
-    uri: 'https://absolute-mastiff-41.hasura.app/v1/graphql',
-  }),
+	link: authLink.concat(httpLink),
   connectToDevTools: true,
   cache: new InMemoryCache(),
 });

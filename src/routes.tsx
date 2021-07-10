@@ -1,5 +1,17 @@
 const routes = [
 	{
+		name: 'Login',
+		path: '/login',
+		component: 'Login',
+		sidebar: true,
+	},
+	{
+		name: 'Profile',
+		path: '/profile',
+		component: 'Profile',
+		sidebar: true,
+	},
+	{
 		name: 'Practices',
 		path: '/practices',
 		component: 'Practices',
