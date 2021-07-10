@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import routes from '../routes';
 
 import Login from "../auth/login";
+import Profile from "../auth/profile";
 import Practices from '../practices/index';
 import Practice from '../practices/id';
 import NewPractice from '../practices/new';
@@ -11,6 +12,7 @@ const componentRegistry: {
 	[key: string]: React.ComponentType
 } = {
 	'Login': Login,
+	'Profile': Profile,
 	'Practices': Practices,
 	'Practice': Practice,
 	'NewPractice': NewPractice,

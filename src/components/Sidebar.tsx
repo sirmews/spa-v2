@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import routes from '../routes';
 
 const Sidebar = () => (
@@ -9,15 +9,15 @@ const Sidebar = () => (
 					<span className="text-white text-3xl font-medium">iDojo</span>
 				</div>
 				<div className="mt-5 flex-1 flex flex-col">
-					<nav className="flex-1 px-3 space-y-1">
+					<nav className="flex-1 flex flex-col px-3 space-y-1">
 						{routes.filter((route) => route.sidebar).map(({path, name}, key) => (
-							<a
+							<Link
 								key={key}
-								href={path}
-								className={`bg-gray-700 text-gray-100 hover:bg-gray-600 group flex items-center px-3 py-2 text-lg font-medium rounded-md`}
+								to={path}
+								className={`text-gray-200 border-b border-transparent hover:border-gray-300 group mx-3 py-2 text-lg font-medium`}
 							>
 								{name}
-							</a>
+							</Link>
 						))}
 					</nav>
 				</div>

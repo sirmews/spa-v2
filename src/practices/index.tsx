@@ -31,14 +31,14 @@ const Practices = () => {
         </li>
       </Link>
       {practices.map((practice: any, index: string) => (
-        <Link key={index} to={`/practice/${practice.id}`}>
+        <Link key={index} to={`/practice/${practice.id}`} className="">
           <li className="flex flex-1 bg-white rounded-lg shadow hover:shadow-md divide-y divide-gray-200">
-            <div className="w-full flex items-center justify-between p-6">
-              <div className="flex-1 truncate space-y-3">
-                <div className="flex items-center space-x-3">
+            <div className="p-6">
+              <div className="space-y-3">
+                <div className="">
                   <h3 className="text-gray-900 text-sm font-medium truncate">{practice.name}</h3>
                 </div>
-                <p className="text-gray-500 text-sm truncate">{practice.goal}</p>
+                <p className="text-gray-500 text-sm break-words">{practice.goal}</p>
                 <div className="flex flex-row h-5 space-x-0.5">
 									<PracticeEventRow practice={practice}/>
                 </div>
