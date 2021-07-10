@@ -3,11 +3,11 @@ import { GET_PRACTICE } from '../gql/queries/getPractice';
 import { useParams } from "react-router-dom";
 
 const Practice = () => {
-  const { id } = useParams<{ id?: string }>();
+  const { id } = useParams<{ id: string }>();
 
   const { data, loading, error } = useQuery(GET_PRACTICE, {
     variables: {
-      id: id
+      id: parseInt(id)
     }
   });
 
@@ -20,8 +20,7 @@ const Practice = () => {
     return <h2>Error :(</h2>
   }
 
-  console.log(data);
-  const { practices_by_pk: practice } = data;
+  const { practice } = data;
 
   return (
     <ul className="sm:grid-cols-2 lg:grid-cols-2">

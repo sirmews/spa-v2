@@ -16,7 +16,7 @@ const Practices = () => {
     return <h2>Error :(</h2>
   }
 
-  const { profile } = data;
+	const { profile } = data;
 	const { practices } = profile;
 
   return (

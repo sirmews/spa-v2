@@ -1,31 +1,22 @@
 import { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { NEW_PRACTICE } from '../gql/mutations/newPractice';
-import { GET_PRACTICES } from '../gql/queries/getPractices';
+import { GET_PROFILE } from '../gql/queries/getProfile';
 import Button from '../components/Button';
 import { useHistory } from "react-router-dom";
+import internal from 'stream';
 
 const NewPractice = () => {
 
-  const [practice, setPractice] = useState({});
+  const [practice, setPractice] = useState<{
+		name?: string,
+		weekly_frequency?: number,
+		goal?: string
+	}>({});
 
   const history = useHistory();
 
-  const updateCache = (cache: any, {data}: any) => {
-    // Fetch the practices from the cache
-    const existingPractices = cache.readQuery({
-      query: GET_PRACTICES
-    });
-
-    // Add the new practice to the cache
-    const newPractice = data.insert_practices.returning[0];
-    cache.writeQuery({
-      query: GET_PRACTICES,
-      data: {practice: [newPractice, ...existingPractices.practices]}
-    });
-  };
-
-  const [addPractice] = useMutation(NEW_PRACTICE, {update: updateCache});
+  const [addPractice] = useMutation(NEW_PRACTICE);
 
   return (
     <div className="sm:grid-cols-2 lg:grid-cols-2">
@@ -33,7 +24,19 @@ const NewPractice = () => {
         <div className="p-4">
           <form className="space-y-4" onSubmit={(e) => {
             e.preventDefault();
-            addPractice({ variables: practice });
+            addPractice(
+							{
+								variables: practice,
+								optimisticResponse: {
+									addPractice: {
+										id: 'temp_id',
+										__typename: "Practice",
+										name: practice.name,
+										weekly_frequency: practice.weekly_frequency,
+										goal: practice.goal
+									}
+								}
+							});
             history.push('/practices')
           }}>
             <div>
@@ -63,6 +66,20 @@ const NewPractice = () => {
                   id="weekly_frequency"
                   className="py-3 px-4 block w-full shadow-sm rounded-md"
                   onChange={(e) => setPractice({...practice, [e.target.name]: parseInt(e.target.value)})}
+                />
+              </div>
+            </div>
+            <div>
+              <label htmlFor="goal" className="block text-md font-medium text-gray-700">
+                Goal
+              </label>
+              <div className="mt-2">
+                <input
+                  type="text"
+                  name="goal"
+                  id="goal"
+                  className="py-3 px-4 block w-full shadow-sm rounded-md"
+                  onChange={(e) => setPractice({...practice, [e.target.name]: e.target.value})}
                 />
               </div>
             </div>
