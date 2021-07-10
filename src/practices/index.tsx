@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { GET_PRACTICES } from '../gql/queries/getPractices';
+import { GET_PROFILE } from '../gql/queries/getProfile';
 import { PlusCircleIcon } from '@heroicons/react/solid';
 import { Link } from "react-router-dom";
 import PracticeEventRow from "../components/practices/PracticeEventRow";
 
 const Practices = () => {
-  const { data, loading, error } = useQuery(GET_PRACTICES);
+  const { data, loading, error } = useQuery(GET_PROFILE);
 
   if (loading) {
     return <h2>Loading Practices...</h2>;
@@ -16,7 +16,8 @@ const Practices = () => {
     return <h2>Error :(</h2>
   }
 
-  const { practices } = data;
+  const { profile } = data;
+	const { practices } = profile;
 
   return (
     <ul className="flex flex-col space-y-6">

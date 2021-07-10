@@ -6,6 +6,17 @@ export const GET_PROFILE = gql`
       id
       name
       email
+			practices {
+				id
+				name
+				goal
+				weekly_frequency
+				events(done: true) {
+					id
+					done
+					created_at
+				}
+			}
     }
   }
 `;

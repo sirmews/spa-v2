@@ -9,14 +9,12 @@ export const GET_PRACTICES = gql`
 			weekly_frequency
       user {
         email
-        first_name
         id
-        last_name
       }
-      practice_events(where: {date: {_lte: "2020-10-14"}}) {
-        date
-        done
+			events(done: true) {
         id
+        done
+        created_at
       }
     }
   }
