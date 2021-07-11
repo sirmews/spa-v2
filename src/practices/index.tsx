@@ -42,13 +42,13 @@ const Practices = () => {
       {practices.map((practice: any, index: string) => (
         <Link key={index} to={`/practice/${practice.id}`} className="">
           <li className="flex flex-1 bg-white rounded-lg shadow hover:shadow-md divide-y divide-gray-200">
-            <div className="p-6">
-              <div className="space-y-3">
+            <div className="p-6 flex flex-1 space-y-3">
+              <div className="flex flex-1 flex-col space-y-3">
                 <div className="">
-                  <h3 className="text-gray-900 text-sm font-medium truncate">{practice.name}</h3>
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">{practice.name}</h3>
                 </div>
                 <p className="text-gray-500 text-sm break-words">{practice.goal}</p>
-                <div className="flex flex-row h-5 space-x-0.5">
+                <div className="flex flex-row w-full space-x-0.5 overflow-hidden rounded-xl">
 									<PracticeEventRow practice={practice}/>
                 </div>
               </div>

@@ -8,17 +8,17 @@ const PracticeEventFeed = ({ events }: any) => {
 						<li key={event.id}>
 							<div className="relative pb-8">
 								{key !== events.length - 1 ? (
-									<span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
+									<span className="absolute top-3 left-3 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
 								) : null}
 								<div className="relative flex space-x-3 items-center">
 									<div>
 										{
 											event.done ? (
-												<span className={'h-8 w-8 rounded-full bg-green-500 flex items-center justify-center ring-8 ring-white'}>
+												<span className={'h-6 w-6 rounded-full bg-green-500 flex items-center justify-center ring-6 ring-white'}>
 													<CheckIcon className="h-4 w-4 text-white" aria-hidden="true" />
 												</span>
 											) : (
-												<span className={'h-8 w-8 rounded-full bg-gray-500 flex items-center justify-center ring-8 ring-white'}>
+												<span className={'h-6 w-6 rounded-full bg-gray-500 flex items-center justify-center ring-6 ring-white'}>
 													<XIcon className="h-4 w-4 text-white" aria-hidden="true" />
 												</span>
 											)

@@ -4,7 +4,7 @@ const PracticeEventRow = ({ practice }: any) => {
 	return (
 		<>
 			{
-				practice ? [...new Array(practice.weekly_frequency).fill({ done:false }), ...practice.events].map((event: any, key: any) => (
+				practice ? [...practice.events, ...new Array(practice.weekly_frequency).fill({ done:false })].map((event: any, key: any) => (
 					<PracticeEventStatus key={key} event={event} />
 				)) : ''
 			}
