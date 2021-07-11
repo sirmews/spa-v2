@@ -5,7 +5,13 @@ export const GET_PRACTICE = gql`
     practice(id: $id) {
       id
       name
+			weekly_frequency
       goal
+			events {
+				id
+				done
+				created_at
+			}
     }
   }
 `;
