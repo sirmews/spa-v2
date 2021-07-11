@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const GET_PROFILE = gql`
-  query getProfile {
+  query getProfile($created_at: DateRange) {
     profile {
       id
       name
@@ -11,7 +11,7 @@ export const GET_PROFILE = gql`
 				name
 				goal
 				weekly_frequency
-				events(done: true) {
+				events(done: true, created_at: $created_at) {
 					id
 					done
 					created_at

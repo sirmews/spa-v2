@@ -2,10 +2,18 @@ import { useQuery } from "@apollo/client";
 import { GET_PROFILE } from '../gql/queries/getProfile';
 import { PlusCircleIcon } from '@heroicons/react/solid';
 import { Link } from "react-router-dom";
+import { startOfWeek, endOfWeek, format } from "date-fns";
 import PracticeEventRow from "../components/practices/PracticeEventRow";
 
 const Practices = () => {
-  const { data, loading, error } = useQuery(GET_PROFILE);
+  const { data, loading, error } = useQuery(GET_PROFILE, {
+    variables: {
+      created_at: {
+				from: format(startOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd"),
+				to: format(endOfWeek(new Date(), { weekStartsOn: 1 }), "yyyy-MM-dd")
+			}
+    }
+  });
 
   if (loading) {
     return <h2>Loading Practices...</h2>;
