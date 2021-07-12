@@ -1,16 +1,22 @@
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
+import { format } from 'date-fns';
 import { GET_PRACTICE } from '../gql/queries/getPractice';
+import { CREATE_PRACTICE_EVENT } from '../gql/mutations/createPracticeEvent';
 import { useParams } from 'react-router-dom';
 import PracticeEventFeed from '../components/practices/PracticeEventFeed';
 
 const Practice = () => {
   const { id } = useParams<{ id: string }>();
 
+	const currentDate = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+
   const { data, loading, error } = useQuery(GET_PRACTICE, {
     variables: {
       id: parseInt(id)
     }
   });
+
+	const [addPracticeEvent] = useMutation(CREATE_PRACTICE_EVENT);
 
   if (loading) {
     return <h2>Loading Practices...</h2>;
@@ -22,7 +28,6 @@ const Practice = () => {
   }
 
   const { practice } = data;
-	console.log(practice);
 
   return (
 			<div className="bg-white rounded-lg shadow divide-y divide-gray-200">
@@ -34,9 +39,22 @@ const Practice = () => {
 						<p className="mt-1 text-gray-500 text-sm truncate">{practice.goal}</p>
 					</div>
 				</div>
-
-				<div className="w-full flex items-center justify-between p-6 space-x-6">
-					<PracticeEventFeed events={practice.events} />
+				<div className="w-full flex flex-col p-6 space-y-8">
+						<div className="flex flex-col justify-stretch">
+              <button onClick={(event: React.MouseEvent<HTMLElement>) => addPracticeEvent(
+								{
+									variables: {
+										practice_id: parseInt(practice.id),
+										done: true,
+										created_at:
+										currentDate
+									}
+								}
+							)} type="button" className="inline-flex justify-center items-center px-3 py-2 border border-gray-500 text-sm leading-4 font-medium rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none">
+                Log Event
+              </button>
+            </div>
+						<PracticeEventFeed events={practice.events} />
 				</div>
 			</div>
   );

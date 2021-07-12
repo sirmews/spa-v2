@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { useMutation } from "@apollo/client";
 import { NEW_PRACTICE } from '../gql/mutations/newPractice';
-import { GET_PROFILE } from '../gql/queries/getProfile';
 import Button from '../components/Button';
 import { useHistory } from "react-router-dom";
-import internal from 'stream';
 
 const NewPractice = () => {
 
