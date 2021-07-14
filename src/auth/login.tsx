@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import { useMutation } from "@apollo/client";
+import { Redirect } from 'react-router-dom';
 import { AUTH_LOGIN } from '../gql/mutations/login';
 import Button from '../components/Button';
 import { useHistory } from "react-router-dom";
+import getAuthenticatedUser from '../utils/getAuthenticatedUser';
+
 
 const Login = () => {
 
@@ -18,6 +21,10 @@ const Login = () => {
 			}
 		}
 	});
+
+	if(getAuthenticatedUser()){
+		return (<Redirect to='/practices' />)
+	}
 
   return (
     <div className="sm:grid-cols-2 lg:grid-cols-2">
