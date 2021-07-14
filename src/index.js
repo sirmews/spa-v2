@@ -13,6 +13,7 @@ import {
   gql
 } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
+import getAuthenticatedUser from './utils/getAuthenticatedUser';
 
 const httpLink = createHttpLink({
     //uri: 'https://idojo-backend-fn4hn.ondigitalocean.app/graphql',
@@ -21,7 +22,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('token');
+  const token = getAuthenticatedUser();
   // return the headers to the context so httpLink can read them
   return {
     headers: {

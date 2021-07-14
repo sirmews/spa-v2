@@ -1,6 +1,8 @@
 import { Switch, Route } from "react-router-dom";
 import routes from '../routes';
 
+import PrivateRoute from "./PrivateRoute";
+
 import Login from "../auth/login";
 import Profile from "../auth/profile";
 import Practices from '../practices/index';
@@ -20,12 +22,21 @@ const componentRegistry: {
 
 const Routes = () => (
 	<Switch>
-		{routes.map(({path, component}: any, key: any) => {
-			return (
-				componentRegistry[component] ? (
+		{routes.map(({path, is_private, component}: any, key: any) => {
+
+			if(componentRegistry[component]){
+				if(is_private){
+					return (
+						<PrivateRoute key={key} path={path} component={componentRegistry[component]}/>
+					)
+				}
+				return (
 					<Route key={key} path={path} component={componentRegistry[component]}/>
-				) : ''
-			)
+				)
+			}
+
+			return '';
+
 		})}
 	</Switch>
 )
