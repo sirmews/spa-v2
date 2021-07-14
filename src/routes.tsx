@@ -3,7 +3,7 @@ const routes = [
 		name: 'Login',
 		path: '/login',
 		component: 'Login',
-		sidebar: true,
+		sidebar: false,
 		is_private: false,
 	},
 	{
