@@ -1,15 +1,38 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { AUTH_LOGOUT } from "../gql/mutations/logout";
 import getAuthenticatedUser from "../utils/getAuthenticatedUser";
+import setAuthenticatedUser from "../utils/setAuthenticatedUser";
 import routes from '../routes';
 import React from "react";
 
 const Sidebar = () => {
 
-	const [logout] = useMutation(AUTH_LOGOUT);
+	const [authenticated, setAuthenticated] = useState<Boolean>(false);
 
-	const token = getAuthenticatedUser() ? getAuthenticatedUser() : '';
+	const history = useHistory();
+
+	const token = getAuthenticatedUser() ? true : false;
+
+	const [logout, { client, loading }] = useMutation(AUTH_LOGOUT, {
+		onCompleted( { logout } ) {
+			if(logout){
+				setAuthenticatedUser({ token: '' });
+				setAuthenticated(false);
+				client.resetStore();
+				history.push('/login');
+			}
+		}
+	});
+
+  useEffect(() => {
+    setAuthenticated(token)
+  }, [token]);
+
+	if (loading) {
+    return <p className="navbar-text navbar-right">Loading...</p>;
+  }
 
 	return (
 		<div className="hidden min-h-screen h-full bg-gray-800 md:flex md:flex-shrink-0">
@@ -21,9 +44,9 @@ const Sidebar = () => {
 					<div className="mt-5 flex-1 flex flex-col">
 						<nav className="flex-1 flex flex-col px-3 space-y-1">
 							{
-								token ? (
+								authenticated ? (
 									<div
-										onClick={(event: React.MouseEvent<HTMLElement>) => logout({ variables: {token: token} })}
+										onClick={(event: React.MouseEvent<HTMLElement>) => logout()}
 										className={`text-gray-200 border-b border-transparent hover:border-gray-300 group mx-3 py-2 text-lg font-medium`}
 									>
 										Logout
