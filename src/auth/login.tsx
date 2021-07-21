@@ -5,6 +5,7 @@ import { AUTH_LOGIN } from '../gql/mutations/login';
 import Button from '../components/Button';
 import { useHistory } from "react-router-dom";
 import getAuthenticatedUser from '../utils/getAuthenticatedUser';
+import setAuthenticatedUser from '../utils/setAuthenticatedUser';
 
 
 const Login = () => {
@@ -16,7 +17,7 @@ const Login = () => {
 	const [login] = useMutation(AUTH_LOGIN, {
 		onCompleted({ login }) {
 			if(login){
-				localStorage.setItem('token', login.token as string);
+				setAuthenticatedUser({token: login.token})
 				history.push('/practices');
 			}
 		}

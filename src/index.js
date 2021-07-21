@@ -8,17 +8,33 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  useQuery,
 	createHttpLink,
-  gql
+  makeVar
 } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import { setContext } from '@apollo/client/link/context';
 import getAuthenticatedUser from './utils/getAuthenticatedUser';
+import setAuthenticatedUser from './utils/setAuthenticatedUser';
+
+const myReactiveVariable = makeVar({
+	authenticated: false,
+})
 
 const httpLink = createHttpLink({
-    //uri: 'https://idojo-backend-fn4hn.ondigitalocean.app/graphql',
-		uri: 'http://microcreds.test/graphql',
+		uri: `${process.env.REACT_APP_GRAPHQL_URI}`,
 });
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.map(({ message, locations, path }) =>
+			message === 'Unauthenticated.' ? handleAuthenticationError : console.error(message)
+    );
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
+
+const handleAuthenticationError = () => {
+	setAuthenticatedUser({ token: '' });
+}
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -33,9 +49,21 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const client = new ApolloClient({
-	link: authLink.concat(httpLink),
+	link: errorLink.concat(authLink.concat(httpLink)),
   connectToDevTools: true,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+		typePolicies: {
+			Query: {
+				fields: {
+					myReactiveVariable: {
+						read() {
+							return myReactiveVariable();
+						}
+					}
+				}
+			}
+		}
+	}),
 });
 
 ReactDOM.render(

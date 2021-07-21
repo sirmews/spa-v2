@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { Link } from "react-router-dom";
+import { useMutation, useQuery } from "@apollo/client";
 import { AUTH_LOGOUT } from "../gql/mutations/logout";
+import { GET_REACTIVE_VARIABLE } from "../gql/queries/getReactiveVariables";
 import getAuthenticatedUser from "../utils/getAuthenticatedUser";
 import setAuthenticatedUser from "../utils/setAuthenticatedUser";
 import routes from '../routes';
@@ -11,17 +12,14 @@ const Sidebar = () => {
 
 	const [authenticated, setAuthenticated] = useState<Boolean>(false);
 
-	const history = useHistory();
-
 	const token = getAuthenticatedUser() ? true : false;
 
-	const [logout, { client, loading }] = useMutation(AUTH_LOGOUT, {
+	const [logout, { client }] = useMutation(AUTH_LOGOUT, {
 		onCompleted( { logout } ) {
 			if(logout){
 				setAuthenticatedUser({ token: '' });
 				setAuthenticated(false);
-				client.resetStore();
-				history.push('/login');
+				//client.resetStore();
 			}
 		}
 	});
@@ -29,10 +27,6 @@ const Sidebar = () => {
   useEffect(() => {
     setAuthenticated(token)
   }, [token]);
-
-	if (loading) {
-    return <p className="navbar-text navbar-right">Loading...</p>;
-  }
 
 	return (
 		<div className="hidden min-h-screen h-full bg-gray-800 md:flex md:flex-shrink-0">
